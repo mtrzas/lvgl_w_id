@@ -895,6 +895,13 @@
     #endif
 #endif
 
+/* Enable assigning IDs to LVGL objects.
+ * 0: disable IDs, 1: enable IDs
+ */
+#ifndef LV_USE_USER_ID
+    #define LV_USE_USER_ID 0
+#endif
+
 /*=====================
  *  COMPILER SETTINGS
  *====================*/

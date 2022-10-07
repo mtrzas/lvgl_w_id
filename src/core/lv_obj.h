@@ -188,6 +188,9 @@ typedef struct _lv_obj_t {
     uint16_t style_cnt  : 6;
     uint16_t h_layout   : 1;
     uint16_t w_layout   : 1;
+#if LV_USE_USER_ID
+    char* user_id;
+#endif
 } lv_obj_t;
 
 
@@ -271,6 +274,19 @@ static inline void lv_obj_set_user_data(lv_obj_t * obj, void * user_data)
 }
 #endif
 
+/**
+ * Set the user_id pointer of the object
+ * @param obj  pointer to an object
+ * @param user_id pointer to the new user_id
+ */
+static inline void lv_obj_set_user_id(lv_obj_t * obj, char user_id[])
+{
+#if LV_USE_USER_ID
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    obj->user_id = user_id;
+#endif
+}
+
 /*=======================
  * Getter functions
  *======================*/
@@ -324,6 +340,21 @@ static inline void * lv_obj_get_user_data(lv_obj_t * obj)
     return obj->user_data;
 }
 #endif
+
+/**
+ * Get the user_id pointer of the object
+ * @param obj pointer to an object
+ * @return the pointer to the user_id of the object
+ */
+static inline char* lv_obj_get_user_id(lv_obj_t * obj)
+{
+#if LV_USE_USER_ID
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    return obj->user_id
+#else
+    return NULL;
+#endif
+}
 
 /*=======================
  * Other functions
